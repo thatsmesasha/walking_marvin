@@ -104,7 +104,7 @@ class Agent:
             history = [state] * self.history_length
             done = False
             index_step = 0
-            while not done:
+            while not done and (index_step < 3000 or not render):
                 if render:
                     self.env.render()
                 action = self.predict(history)
@@ -173,7 +173,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         print "\nExiting..."
     except Exception as e:
-        print "An error occured: " + e
+        print "An error occured: " + str(e)
     finally:
         if args.save_weights:
             agent.save(args.save_weights)
